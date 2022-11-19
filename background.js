@@ -25,6 +25,7 @@ chrome.notifications.onClicked.addListener(function(nID) {
         const reminder = reminders.find(r => r.id === nID);
         if(reminder) {
             chrome.tabs.create({url: reminder.url});
+            clearReminder(reminder);
         } else {
             console.log(reminders)
         }
@@ -58,6 +59,7 @@ function createReminder(msg){
 };
 
 function snoozeReminder(msg){
+    clearReminder(msg);
     chrome.alarms.create(msg.id, {when: Date.now()+60000});
     chrome.storage.local.get("reminders", function(result) {
         const reminders = result.reminders || [];
@@ -81,8 +83,8 @@ function notify(msg) {
     chrome.notifications.create(msg.id, {
         type: "basic",
         iconUrl: "assets/kuzco.png",
-        title: "Reminder",
-        message: "Time to visit " + msg.url,
+        title: msg.title,
+        message: "Hey remember this thing " + msg.url,
         buttons: [{title: 'Done'},{title: '5 More Minutes'}]
     })
 };

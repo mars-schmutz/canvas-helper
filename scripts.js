@@ -9,6 +9,7 @@ const done = document.getElementsByClassName("mark-done");
 clear.addEventListener("click", () => {
     if (confirm("Are you sure you want to clear all reminders?")) {
         chrome.storage.local.remove("reminders");
+        chrome.alarms.clearAll();
         reminders.innerHTML = "";
     }
 })
@@ -40,6 +41,7 @@ function renderReminders(remindersList) {
                 const reminder = reminders.find(r => r.id === done[i].dataset.id);
                 if (reminder) {
                     reminders.splice(reminders.indexOf(reminder), 1);
+                    chrome.alarms.clear(reminder.id)
                     chrome.storage.local.set({ reminders });
                     renderReminders(reminders);
                 }
