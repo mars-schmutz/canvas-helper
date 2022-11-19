@@ -4,7 +4,8 @@
     "version": "0.1",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Reminders"
+        "default_title": "Reminders",
+        "default_icon": "assets/canvas-logo.png"
     },
     "permissions": [
         "storage",
