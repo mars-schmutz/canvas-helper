@@ -1,36 +1,22 @@
 chrome.runtime.onMessage.addListener(msg => {
-    switch(msg.type) {
-        case "remind":
-            saveReminder(msg);
-            break;
-        default:
-            console.log("unknown message", msg);
-            break;
-    }
-})
+    console.log(msg);
+    createReminder(msg)
+});
 
-function scheduleReminder(msg) {
-    chrome.alarms.create(msg.title, {delayInMinutes: 1, periodInMinutes: 1});
-}
-
-function saveReminder(msg) {
+chrome.alarms.onAlarm.addListener(alarm => {
+    console.log(alarm);
+    var localKey = alarm.name
+    console.log(localKey)
     chrome.storage.local.get("reminders", function(result) {
         const reminders = result.reminders || [];
-        reminders.push(msg);
-        chrome.storage.local.set({ reminders });
-    });
-    // scheduleReminder(msg);
-    notify(msg.id, msg.title);
-}
-
-function notify(id, title) {
-    chrome.notifications.create(id, {
-        type: "basic",
-        iconUrl: "assets/kuzco.png",
-        title: "Reminder",
-        message: "Don't forget you have " + title + " due!",
+        const reminder = reminders.find(r => r.id === localKey);
+        if(reminder) {
+            notify(reminder)
+        } else {
+            console.log(reminders)
+        }
     })
-}
+});
 
 chrome.notifications.onClicked.addListener(function(nID) {
     console.log("notification clicked", nID);
@@ -44,3 +30,59 @@ chrome.notifications.onClicked.addListener(function(nID) {
         }
     })
 })
+
+chrome.notifications.onButtonClicked.addListener(function(nID, btnIDX){
+    chrome.storage.local.get("reminders", function(result) {
+        const reminders = result.reminders || [];
+        const reminder = reminders.find(r => r.id === nID);
+        if(reminder) {
+            if(btnIDX == 0){
+                clearReminder(reminder)
+            }
+            else if(btnIDX == 1){
+                snoozeReminder(reminder)
+            }
+        } else {
+            console.log(reminders)
+        }
+    })
+});
+
+function createReminder(msg){
+    chrome.alarms.create(msg.id, {when: msg.when});
+    chrome.storage.local.get("reminders", function(result) {
+        const reminders = result.reminders || [];
+        reminders.push(msg);
+        chrome.storage.local.set({ reminders });
+    });
+};
+
+function snoozeReminder(msg){
+    chrome.alarms.create(msg.id, {when: Date.now()+60000});
+    chrome.storage.local.get("reminders", function(result) {
+        const reminders = result.reminders || [];
+        reminders.push(msg);
+        chrome.storage.local.set({ reminders });
+    });
+};
+
+function clearReminder(msg){
+    chrome.storage.local.get("reminders", function(result) {
+        const reminders = result.reminders || [];
+        const reminder = reminders.find(r => r.id === msg.id);
+        if (reminder) {
+            reminders.splice(reminders.indexOf(reminder), 1);
+            chrome.storage.local.set({ reminders });
+        }
+    })
+};
+
+function notify(msg) {
+    chrome.notifications.create(msg.id, {
+        type: "basic",
+        iconUrl: "assets/kuzco.png",
+        title: "Reminder",
+        message: "Time to visit " + msg.url,
+        buttons: [{title: 'Done'},{title: '5 More Minutes'}]
+    })
+};

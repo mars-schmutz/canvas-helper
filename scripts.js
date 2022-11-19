@@ -1,5 +1,6 @@
 const url = document.getElementById("url");
 const title = document.getElementById("title");
+const due = document.getElementById("due-date");
 const add = document.getElementById("add-btn");
 const clear = document.getElementById("clear-btn");
 const reminders = document.getElementById("reminders");
@@ -14,19 +15,16 @@ clear.addEventListener("click", () => {
 
 add.addEventListener("click", function() {
     chrome.runtime.sendMessage("", {
-        id: uid(),
+        id: title.value,
         type: "remind",
         title: title.value,
         url: url.value,
-        when: Date.now()
+        when: Date.parse(due.value)
     })
     title.value = "";
     url.value = "";
+    due.value = "";
 })
-
-function uid() {
-    return Math.random().toString(16).substring(2) + (new Date()).getTime().toString(16);
-}
 
 function renderReminders(remindersList) {
     const html = remindersList.map(r => `
