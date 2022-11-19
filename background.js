@@ -59,13 +59,7 @@ function createReminder(msg){
 };
 
 function snoozeReminder(msg){
-    clearReminder(msg);
     chrome.alarms.create(msg.id, {when: Date.now()+60000});
-    chrome.storage.local.get("reminders", function(result) {
-        const reminders = result.reminders || [];
-        reminders.push(msg);
-        chrome.storage.local.set({ reminders });
-    });
 };
 
 function clearReminder(msg){
