@@ -20,15 +20,15 @@ function saveReminder(msg) {
         chrome.storage.local.set({ reminders });
     });
     // scheduleReminder(msg);
-    notify(msg.id, msg.url);
+    notify(msg.id, msg.title);
 }
 
-function notify(id, url) {
+function notify(id, title) {
     chrome.notifications.create(id, {
         type: "basic",
         iconUrl: "assets/kuzco.png",
         title: "Reminder",
-        message: "Time to visit " + url
+        message: "Don't forget you have " + title + " due!",
     })
 }
 
