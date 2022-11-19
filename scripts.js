@@ -28,7 +28,7 @@ add.addEventListener("click", function() {
 
 function renderReminders(remindersList) {
     const html = remindersList.map(r => `
-        <li><span class="mark-done" data-id="${r.id}">&#88;</span>${r.title}</li>
+        <li><span class="mark-done" data-id="${r.id}">&#88;</span><a href="${r.url}" target="_blank">${r.title}</a></li>
     `).join("");
     reminders.innerHTML = html;
     console.log(html);
