@@ -1,0 +1,15 @@
+#reminders {
+    padding-left: 0.25em;
+}
+
+#reminders li {
+    list-style: none;
+}
+
+.mark-done {
+    margin-right: 1.9em;
+}
+
+.mark-done:hover {
+    cursor: pointer;
+}
