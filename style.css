@@ -1,3 +1,20 @@
+#app{
+    font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+button{
+    background-color: #881518;
+    color: white;
+    border: none;
+}
+button:hover{
+    background-color: rgb(114, 18, 20);
+    transition-duration: .5s;
+}
+#center-button{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
 #reminders {
     padding-left: 0.25em;
 }

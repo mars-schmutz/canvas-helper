@@ -76,7 +76,7 @@ function clearReminder(msg){
 function notify(msg) {
     chrome.notifications.create(msg.id, {
         type: "basic",
-        iconUrl: "assets/kuzco.png",
+        iconUrl: "assets/canvas-logo.png",
         title: msg.title,
         message: "Hey remember this thing " + msg.url,
         buttons: [{title: 'Done'},{title: '5 More Minutes'}]
