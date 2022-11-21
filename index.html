@@ -5,19 +5,26 @@
 </head>
 <body id="app">
     <button id="clear-btn">Clear All</button>
-    <h2>New</h2>
-    <label>Reminder Title</label>
-    <input id="title">
-    <label>Reminder URL</label>
-    <input id="url">
-    <br>
-    <label>Due</label>
-    <input type="datetime-local" id="due-date">
-    <div id="center-button">
-        <button id="add-btn">Add</button>
+    <h1>New</h1>
+    <div id="new-reminder">
+        <span>
+            <label>Reminder Title</label>
+            <input id="title">
+        </span>
+        <span>
+            <label>Reminder URL</label>
+            <input id="url">
+        </span>
+        <span>
+            <label>Due</label>
+            <input type="datetime-local" id="due-date">
+        </span>
+        <div id="center-button">
+            <button id="add-btn">Add</button>
+        </div>
     </div>
     <div>
-    <h2>Reminders</h2>
+    <h1>Reminders</h1>
     <ul id="reminders"></ul>
     </div>
     <script src="scripts.js"></script>

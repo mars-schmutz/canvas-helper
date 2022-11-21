@@ -1,19 +1,26 @@
 #app{
     font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 1em;
+    width: 25em;
 }
 button{
     background-color: #881518;
     color: white;
     border: none;
+    padding: 0.75em;
+    border-radius: 0.4em;
 }
 button:hover{
     background-color: rgb(114, 18, 20);
     transition-duration: .5s;
 }
+h1 {
+    margin: 0;
+}
 #center-button{
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 #reminders {
     padding-left: 0.25em;
@@ -21,12 +28,44 @@ button:hover{
 
 #reminders li {
     list-style: none;
+    font-size: 1.2rem;
 }
 
 .mark-done {
     margin-right: 1.9em;
+    font-size: 1.2rem;
+    color:rgb(114, 18, 20);
 }
 
 .mark-done:hover {
     cursor: pointer;
+}
+
+#new-reminder {
+    padding: 0.5em;
+    border: 1px solid #881518;
+    border-radius: 0.4em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+#new-reminder span {
+    margin: 0.5em;
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+}
+
+#new-reminder span input {
+    padding: 0.25em;
+}
+
+#new-reminder span label {
+    font-size: 1rem;
+}
+
+#clear-btn {
+    margin-bottom: 1em;
 }
