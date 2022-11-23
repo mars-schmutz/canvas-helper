@@ -5,8 +5,8 @@
 </head>
 <body id="app">
     <button id="clear-btn">Clear All</button>
-    <h1>New</h1>
-    <div id="new-reminder">
+    <div class="container" id="new-reminder">
+        <h1>New</h1>
         <span>
             <label>Reminder Title</label>
             <input id="title">
@@ -19,13 +19,11 @@
             <label>Due</label>
             <input type="datetime-local" id="due-date">
         </span>
-        <div id="center-button">
-            <button id="add-btn">Add</button>
-        </div>
+        <button id="add-btn">Add</button>
     </div>
-    <div>
-    <h1>Reminders</h1>
-    <ul id="reminders"></ul>
+    <div class="container">
+        <h1>Reminders</h1>
+        <ul id="reminders-list"></ul>
     </div>
     <script src="scripts.js"></script>
 </body>

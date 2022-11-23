@@ -3,7 +3,7 @@ const title = document.getElementById("title");
 const due = document.getElementById("due-date");
 const add = document.getElementById("add-btn");
 const clear = document.getElementById("clear-btn");
-const reminders = document.getElementById("reminders");
+const reminders = document.getElementById("reminders-list");
 const done = document.getElementsByClassName("mark-done");
 
 clear.addEventListener("click", () => {
